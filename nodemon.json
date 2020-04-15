@@ -1,6 +1,4 @@
 {
   "watch": ["."],
-  "ext": "ts",
-  "ignore": ["src/**/*.spec.ts"],
-  "exec": "node --experimental-modules --es-module-specifier-resolution=node --inspect --require ts-node/register"
+  "ext": "ts"
 }

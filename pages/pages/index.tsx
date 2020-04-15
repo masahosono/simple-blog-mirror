@@ -1,5 +1,5 @@
 import React from "react";
-import TopTemplate from "../src/component/template/top";
+import PagesTemplate from "../../src/component/template/pages";
 
 interface Props {
     title: string;
@@ -9,13 +9,12 @@ interface Props {
 }
 
 // TOP
-const Index = (props: Props) => <TopTemplate {...props} />;
+const Index = (props: Props) => <PagesTemplate {...props} />;
 
 Index.getInitialProps = ({}) => {
     const pageInfo = {
-        title: "",
-        robots: false,
-        description: "",
+        title: "記事一覧",
+        robots: true,
     };
     return { ...pageInfo };
 };
