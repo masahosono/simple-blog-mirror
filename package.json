@@ -1,7 +1,7 @@
 {
   scripts: {
     start: "next start",
-    dev: "nodemon server.js",
+    dev: "nodemon",
     build: "next build",
     production: "NODE_ENV=production node ."
   },
