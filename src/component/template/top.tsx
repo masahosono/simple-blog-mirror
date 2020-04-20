@@ -11,15 +11,15 @@ interface Props {
 }
 
 const MainWrapper = styled.main`
+    padding-top: 30px;
     background-color: #f5f5f5;
 `;
 
 const Main = styled.div`
     display: flex;
     min-height: 100vh;
-    max-width: 1200px;
-    margin-right: auto;
-    margin-left: auto;
+    max-width: 1177px;
+    margin: auto;
     background-color: white;
 `;
 
@@ -30,24 +30,22 @@ const ContentWrapper = styled.div`
 `;
 
 const Content = styled.div`
-    max-width: 1000px;
-    text-align: center;
-    margin: 20px auto;
+    flex: 1;
+    max-width: 1100px;
+    margin: 20px;
 `;
 
 export default (props: Props) => (
-    <div>
-        <Header />
+    <>
+        {/* <Header /> */}
         <MainWrapper>
             <Main>
-                <ContentWrapper>
-                    <Content>
-                        <Pages />
-                    </Content>
-                </ContentWrapper>
+                <Content>
+                    <Pages />
+                </Content>
                 <SideBar />
             </Main>
         </MainWrapper>
         <Footer />
-    </div>
+    </>
 );
