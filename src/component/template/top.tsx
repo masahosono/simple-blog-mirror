@@ -12,7 +12,7 @@ interface Props {
 
 const MainWrapper = styled.main`
     padding-top: 30px;
-    background-color: #f5f5f5;
+    background-color: white;
 `;
 
 const Main = styled.div`
@@ -37,7 +37,7 @@ const Content = styled.div`
 
 export default (props: Props) => (
     <>
-        {/* <Header /> */}
+         <Header />
         <MainWrapper>
             <Main>
                 <Content>
