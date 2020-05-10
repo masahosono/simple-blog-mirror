@@ -12,7 +12,6 @@ app.prepare().then(() => {
     })
 
     server.listen(3000, err => {
-        if (err) console.error(err.stack)
         console.debug('> Ready on http://localhost:3000')
     })
 }).catch(err => {

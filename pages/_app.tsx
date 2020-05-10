@@ -1,18 +1,25 @@
 import React from "react";
 import Head from "next/head";
+import Error from "next/error";
 
 interface Props {
     Component: any;
     pageProps: {
-        title: string;
-        robots: boolean;
-        keywords: string;
-        description: string;
+        title?: string;
+        robots?: boolean;
+        keywords?: string;
+        description?: string;
+        text?: string;
+        isError?: boolean;
     };
 }
 
 export default (props: Props) => {
     const { Component, pageProps } = props;
+
+    if (pageProps.isError) {
+        return <Error statusCode={400} />;
+    }
 
     return (
         <React.Fragment>
@@ -30,6 +37,10 @@ export default (props: Props) => {
                 {pageProps.description && (
                     <meta name="description" content={pageProps.description} />
                 )}
+                <meta
+                    name="viewport"
+                    content="minimum-scale=1, initial-scale=1, width=device-width"
+                />
             </Head>
             <Component {...pageProps} />
         </React.Fragment>

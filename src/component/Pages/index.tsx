@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import ArticleModel from "src/model/db/Article";
+import dbConnect from "src/util/dbConnect";
 
 const ArticleWrapper = styled.div`
     padding-top: 20px;
@@ -110,13 +112,15 @@ export default () => (
     <ArticleWrapper>
         {mockData.map((data) => {
             return (
-                <Link href={"/post/" + data.id} passHref>
-                    <Article>
-                        <Title>{data.title}</Title>
-                        <Description>{data.description}</Description>
-                        <Date>{data.date}</Date>
-                    </Article>
-                </Link>
+                <>
+                    <Link href={"/post/" + data.id} passHref>
+                        <Article>
+                            <Title>{data.title}</Title>
+                            <Description>{data.description}</Description>
+                            <Date>{data.date}</Date>
+                        </Article>
+                    </Link>
+                </>
             );
         })}
     </ArticleWrapper>
