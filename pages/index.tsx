@@ -1,18 +1,32 @@
 import { NextApiRequest } from "next";
 import React from "react";
-import TopTemplate from "src/component/template/top";
+import Pages from "src/component/Pages";
+import { getArticles } from "src/infra/article/getArticles/api";
+import GetArticlesResponse from "src/infra/article/getArticles/response";
+import { ArticleData } from "types/article";
 
 interface Props {
     title: string;
-    @@ -11,14 +14,20 @@ interface Props {
-// TOP
-    const Index = (props: Props) => <TopTemplate {...props} />;
+    robots: boolean;
+    keywords: string;
+    description: string;
+    articles?: ArticleData[];
+}
+
+const Index = (props: Props) => <Pages {...props} />;
 
 export async function getServerSideProps(req: NextApiRequest) {
 
-    await fetch(`http://localhost:3000/api/atricle/page/1`, {
-        method: 'Get',
-    })
+    const articlesResponse: GetArticlesResponse | undefined = await getArticles();
+    const articles: ArticleData[] | undefined = articlesResponse?.articles;
+
+    if (articles === undefined) {
+        return {
+            props: {
+                isError: true
+            }
+        }
+    }
 
     const pageInfo = {
         title: "",
@@ -20,7 +34,7 @@ export async function getServerSideProps(req: NextApiRequest) {
         description: "",
     };
 
-    return { props: { ...pageInfo } }
+    return { props: { ...pageInfo, articles } }
 }
 
 export default Index;

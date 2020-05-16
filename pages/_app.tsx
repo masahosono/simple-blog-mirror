@@ -2,6 +2,8 @@ import React from "react";
 import Head from "next/head";
 import Error from "next/error";
 
+import Layout from 'src/component/layout';
+
 interface Props {
     Component: any;
     pageProps: {
@@ -42,7 +44,9 @@ export default (props: Props) => {
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
             </Head>
-            <Component {...pageProps} />
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
         </React.Fragment>
     );
 };
