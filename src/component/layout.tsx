@@ -1,13 +1,10 @@
 import Header from "../Header";
-import Pages from "../Pages";
 import Footer from "../Footer";
 import React from "react";
-import SideBar from "../SideBar";
 import styled from "styled-components";
 
 interface Props {
-    title: string;
-    robots: boolean;
+    children: React.ReactElement;
 }
 
 const MainWrapper = styled.main`
@@ -37,13 +34,12 @@ const Content = styled.div`
 
 export default (props: Props) => (
     <>
-         <Header />
+        <Header />
         <MainWrapper>
             <Main>
                 <Content>
-                    <Pages />
+                    {props.children}
                 </Content>
-                <SideBar />
             </Main>
         </MainWrapper>
         <Footer />
