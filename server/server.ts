@@ -1,13 +1,40 @@
 import express from 'express';
 import next from 'next';
+import multer from "multer";
+import fs from "fs";
+import moment from "moment";
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handler = app.getRequestHandler()
 const server = express()
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = 'public/image/article/' + moment().format('YYYYMMDD');
+        if (!fs.existsSync(dir)) {
+            fs.mkdir(dir, () => {
+                cb(null, dir)
+            });
+        } else {
+            cb(null, dir)
+        }
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    },
+})
+const upload = multer({ storage }).single('file');
+
 app.prepare().then(() => {
-    server.get('*', (req, res) => {
+    server.post("/api/image", (req, res) => {
+        upload(req, res, () => {
+            const url = req.headers.origin + '/' + req.file.path.replace('public/', '');
+            res.json({ imageUrl: url });
+        })
+    })
+
+    server.all('*', (req, res) => {
         return handler(req, res)
     })
 
