@@ -5,12 +5,11 @@ import getArticleById from "src/infra/article/getArticleById/api";
 import ArticleRequest from "src/infra/article/getArticleById/request";
 import ArticleResponse from "src/infra/article/getArticleById/response";
 import { ArticleData } from "types/article";
+import { PageInfo } from "types/pageInfo";
 
 interface Props {
-    title?: string;
-    robots?: boolean;
-    article?: ArticleData;
-    isError?: boolean
+    pageInfo: PageInfo;
+    article: ArticleData;
 }
 
 // TOP
@@ -40,6 +39,7 @@ export async function getServerSideProps(req: NextApiRequest, res: NextApiRespon
 
     const pageInfo = {
         title: `${article?.title}`,
+        description: article.description,
         robots: false
     };
 

@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 
 const ArticleSchema = new mongoose.Schema({
+    _id: {
+        type: String,
+        required: true
+    },
     title: {
         type: String
     },

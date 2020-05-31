@@ -1,6 +1,7 @@
 import dbConnect from 'src/util/dbConnect'
 import ArticleModel from 'src/model/db/Article'
-import { NextApiRequest, NextApiResponse } from 'next'
+import moment from 'moment';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const {
@@ -24,6 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 const article = await ArticleModel.create(
                     {
                         ...req.body,
+                        _id,
                         date
                     }
                 );

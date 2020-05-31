@@ -2,18 +2,13 @@ import React from "react";
 import Head from "next/head";
 import Error from "next/error";
 
+import { PageInfo } from "types/pageInfo";
 import Layout from 'src/component/layout';
+import 'src/style/global.css'
 
 interface Props {
     Component: any;
-    pageProps: {
-        title?: string;
-        robots?: boolean;
-        keywords?: string;
-        description?: string;
-        text?: string;
-        isError?: boolean;
-    };
+    pageProps: PageInfo;
 }
 
 export default (props: Props) => {
@@ -32,11 +27,7 @@ export default (props: Props) => {
                         name="robots"
                         content="noindex, nofollow, noarchive"
                     />
-                )}
-                {pageProps.keywords && (
-                    <meta name="keywords" content={pageProps.keywords} />
-                )}
-                {pageProps.description && (
+                )}s.description && (
                     <meta name="description" content={pageProps.description} />
                 )}
                 <meta
