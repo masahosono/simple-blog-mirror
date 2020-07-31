@@ -4,6 +4,9 @@ import multer from "multer";
 import fs from "fs";
 import moment from "moment";
 
+import apiRoutes from './api'
+import auth from "./auth";
+
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handler = app.getRequestHandler()
@@ -27,12 +30,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage }).single('file');
 
 app.prepare().then(() => {
-    server.post("/api/image", (req, res) => {
-        upload(req, res, () => {
-            const url = req.headers.origin + '/' + req.file.path.replace('public/', '');
-            res.json({ imageUrl: url });
-        })
-    })
+    server.use("/api", apiRoutes, (req, res) => {
+        req.url = req.originalUrl;
+        return handler(req, res);
+    });
+
+    server.get(/^\/admin/, auth, (req, res) => {
+        return handler(req, res);
+    });
 
     server.all('*', (req, res) => {
         return handler(req, res)
